@@ -33,7 +33,7 @@ Use Finger IDA plugin in the function window:
 The successfully recognized function symbols will be highlighted in the disassembly window and function window.
 ![4](images/4.png)
 
-##IDAPro 9.0 API
+## IDAPro 9.0 API
 https://python.docs.hex-rays.com/9.0/d0/d4c/ida__ida_8py.html
 chang code in site-packages/finger_sdk/ida_func.py
 ~~~
