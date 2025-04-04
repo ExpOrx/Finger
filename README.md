@@ -32,3 +32,53 @@ Use Finger IDA plugin in the function window:
 ### function symbol presentation
 The successfully recognized function symbols will be highlighted in the disassembly window and function window.
 ![4](images/4.png)
+
+##IDAPro 9.0 API
+https://python.docs.hex-rays.com/9.0/d0/d4c/ida__ida_8py.html
+chang code in site-packages/finger_sdk/ida_func.py
+~~~
+import ida_ida
+......
+    def get_file_structure(self):
+        try:
+            info = idaapi.get_inf_structure()
+            arch = info.procName
+            if info.is_be():
+                endian = "MSB"
+            else:
+                endian = "LSB"
+        except:
+            arch = ida_ida.inf_get_procname()
+            if ida_ida.inf_is_be():
+                endian = "MSB"
+            else:
+                endian = "LSB"
+        return arch, endian
+    
+
+    def get_file_type(self):
+        file_format = ""
+        file_type = ""
+        try:
+            info = idaapi.get_inf_structure()
+            if info.is_64bit():
+                file_format = "64"
+            elif info.is_32bit():
+                file_format = "32"
+            if info.filetype == idaapi.f_PE:
+                file_type = "PE"
+            elif info.filetype == idaapi.f_ELF:
+                file_type = "ELF"
+        except:
+            if ida_ida.inf_is_64bit():
+                file_format = "64"
+            elif ida_ida.inf_is_32bit_exactly() and not ida_ida.inf_is_64bit():
+                file_format = "32"
+            if 	ida_ida.inf_get_filetype() == idaapi.f_PE:
+                file_type = "PE"
+            elif ida_ida.inf_get_filetype() == idaapi.f_ELF:
+                file_type = "ELF"        
+        
+        return file_format, file_type
+......
+~~~
