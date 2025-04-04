@@ -81,4 +81,6 @@ import ida_ida
         
         return file_format, file_type
 ......
+/Applications/IDA\ Professional\ 9.0.app/
+[+]Recognize sub_140004F10: std::basic_filebuf<char,std::char_traits<char>>::_Endwrite(void)
 ~~~
